@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProvaMobile.MainPage">
+
+    <StackLayout>
+
+        <Frame BackgroundColor="#003048" Padding="25" >
+            <Label Text="Quitanda ETEC" HorizontalTextAlignment="Center" FontSize="36" FontAttributes="Bold" TextColor="White" />
+        </Frame>
+
+        <Label Text="Usuário" />
+        <Entry Placeholder="Digite o usuário" x:Name="edtUsuario"/>
+
+        <Label Text="Senha" />
+        <Entry Placeholder="Digite a senha" x:Name="edtSenha"  />
+
+        <Button x:Name="btnLogar" Text="Entrar" Clicked="btnLogar_Clicked"/>
+
+    </StackLayout>
+
+</ContentPage>

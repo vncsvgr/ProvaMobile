@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="ProvaMobile.Vendas">
+    <ContentPage.Content>
+        <StackLayout>
+
+            <Frame BackgroundColor="#003048" Padding="25" >
+                <Label Text="Quitanda ETEC" HorizontalTextAlignment="Center" FontSize="36" FontAttributes="Bold" TextColor="White" />
+            </Frame>
+
+            <Picker x:Name="pckProdutos" Title="Selecione o produto" SelectedIndexChanged="pckProdutos_SelectedIndexChanged"/>
+
+            <Entry x:Name="edtQuantidade" Placeholder="Informe a quantidade" />
+
+            <Entry x:Name="edtVlrUnitario" Placeholder="Informe o valor unitário" />
+
+            <Button x:Name="btnAdicionar" Text="Adicionar" Clicked="btnAdicionar_Clicked"/>
+
+            <SearchBar x:Name="sbProdutos" TextChanged="sbProdutos_TextChanged" />
+
+            <ListView x:Name="lstProdutos" ItemSelected="lstProdutos_ItemSelected" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+
+                            <Grid ColumnDefinitions="*,*,*">
+                                <Label Text="{Binding Nome}" HorizontalTextAlignment="Center" />
+                                <Label Grid.Column="1" Text="{Binding Qtde}"  HorizontalTextAlignment="Center" />
+                                <Label Grid.Column="2" Text="{Binding VlrUnitario}"  HorizontalTextAlignment="Center" />
+                            </Grid>
+
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <Entry x:Name="edtValorTotal" Text="Valor da Venda" HorizontalTextAlignment="End"/>
+
+            <Button x:Name="btnFinalizar" Text="Finalizar a Venda" Clicked="btnFinalizar_Clicked"/>
+
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
