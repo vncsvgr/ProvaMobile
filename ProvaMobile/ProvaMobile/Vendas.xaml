@@ -9,7 +9,7 @@
                 <Label Text="Quitanda ETEC" HorizontalTextAlignment="Center" FontSize="36" FontAttributes="Bold" TextColor="White" />
             </Frame>
 
-            <Picker x:Name="pckProdutos" Title="Selecione o produto" SelectedIndexChanged="pckProdutos_SelectedIndexChanged"/>
+            <Picker x:Name="pckProdutos" Title="Selecione o produto"/>
 
             <Entry x:Name="edtQuantidade" Placeholder="Informe a quantidade" />
 

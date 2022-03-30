@@ -18,18 +18,13 @@ namespace ProvaMobile
 
         List<string> produtos = new List<string>()
         {
-            "cenoura",
-            "banana"
+            "Cenoura",
+            "Banana",
+            "Mamão",
+            "Maçã",
+            "Morango",
+            "Abacaxi"
         };
-
-
-        //List<Produtos> produtos = new List<Produtos>
-        //{
-        //    new Produtos {Nome="Cenoura"},
-        //    new Produtos {Nome="Banana"},
-        //    new Produtos {Nome="Morango"},
-
-        //};
 
         public Vendas()
         {
@@ -41,7 +36,6 @@ namespace ProvaMobile
 
             
         }
-
         private void btnAdicionar_Clicked(object sender, EventArgs e)
         {
             Produtos p = new Produtos();
@@ -54,45 +48,48 @@ namespace ProvaMobile
             lstProdutos.ItemsSource = null;
             lstProdutos.ItemsSource = PropriedadesApp.produtos;
 
-            //pckProdutos.ItemsSource = null;
+            pckProdutos.ItemsSource = null;
+            pckProdutos.ItemsSource = produtos;
             edtQuantidade.Text = "";
             edtVlrUnitario.Text = "";
 
             total += p.Qtde * p.VlrUnitario;
 
-            edtValorTotal.Text = total.ToString("F");
-
-
-            //Smartphone sp = new Smartphone();
-            //sp.Fabricante = edtFabricante.Text;
-            //sp.Modelo = edtModelo.Text;
-            //sp.Cor = edtCor.Text;
-
-            //PropriedadesApp.Smart.Add(sp);
-
-            //edtFabricante.Text = "";
-            //edtModelo.Text = "";
-            //edtCor.Text = "";
+            edtValorTotal.Text = total.ToString("C");
         }
 
         private void sbProdutos_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            lstProdutos.ItemsSource = PropriedadesApp.produtos.Where(
+               x => x.Nome.ToUpper().Contains(sbProdutos.Text.ToUpper()));
         }
 
-        private void lstProdutos_ItemSelected(object sender, SelectedItemChangedEventArgs e)
+        async private void lstProdutos_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
+            var a = e.SelectedItem as Produtos;
 
+            var resp = await DisplayAlert("Exclusão", "Deseja excluir o produto " + a.Nome + "?", "Sim", "Não");
+
+            if (resp)
+            {
+                var item = PropriedadesApp.produtos.Find(x => x.Nome == a.Nome);
+                PropriedadesApp.produtos.Remove(item);
+                lstProdutos.ItemsSource = null;
+                lstProdutos.ItemsSource = PropriedadesApp.produtos;
+
+                total -= item.Qtde * item.VlrUnitario;
+            }
+
+            edtValorTotal.Text = total.ToString("C");
         }
 
-        private void btnFinalizar_Clicked(object sender, EventArgs e)
+        async private void btnFinalizar_Clicked(object sender, EventArgs e)
         {
-
-        }
-
-        private void pckProdutos_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
+            var fechar = await DisplayAlert("Fechar", "Deseja encerrar o aplicativo?", "Sim", "Não");
+            if (fechar)
+            {
+                Environment.Exit(0);
+            }
         }
     }
 }
